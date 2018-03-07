@@ -1,4 +1,4 @@
-require "idcard_operation/version"
+require_relative "./idcard_operation/version"
 require_relative './idcard_operation/idcard_info'
 require_relative './idcard_operation/roc_idcard_info'
 

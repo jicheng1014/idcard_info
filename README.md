@@ -1,8 +1,18 @@
 # IdcardOperation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/idcard_operation`. To experiment with that code, run `bin/console` for an interactive prompt.
+身份证查询校验, 根据身份证返回所有包含的信息
 
-TODO: Delete this and the text above, and describe your gem
+## 大陆地区
+- 是否通过校验
+- 性别
+- 出生地所在省份
+- 具体出生地
+- 出生日期
+
+## 台湾地区
+- 是否通过校验
+- 性别
+- 出生地
 
 ## Installation
 
@@ -22,7 +32,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'idcard_operation'
+
+2.4.2 :008 > info = IdcardOperation.analysis("330411198702198263")  # 身份证是模拟的
+ => #<IdcardInfo:0x00007fae6818df08 @idcard="330411198702198263", @valid=true, @birthday=#<Date: 1987-02-19 ((2446846j,0s,0n),+0s,2299161j)>, @gender="女", @location_raw="浙江省嘉兴市郊区", @main_location="浙江省">
+
+2.4.2 :009 > info.to_h
+ => {:idcard=>"330411198702198263", :valid=>true, :birthday=>#<Date: 1987-02-19 ((2446846j,0s,0n),+0s,2299161j)>, :gender=>"女", :location_raw=>"浙江省嘉兴市郊区", :main_location=>"浙江省"}
+
+2.4.2 :010 > info = IdcardOperation.analysis("S174475135")
+ => #<RocIdcardInfo:0x00007fae68177348 @idcard="S174475135", @gender="男", @location="高雄县">
+
+```
 
 ## Development
 

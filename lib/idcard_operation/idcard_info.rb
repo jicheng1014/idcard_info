@@ -25,7 +25,7 @@ class IdcardInfo
   end
 
   def calc_gender
-    idcard[-2] == '1' ? "男" : "女"
+    idcard[-2].to_i % 2 == 1 ? "男" : "女"
   end
 
   def calc_birthday

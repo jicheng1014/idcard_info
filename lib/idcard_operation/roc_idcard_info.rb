@@ -2,10 +2,12 @@
 # 台湾国民身份证校验
 
 class RocIdcardInfo
-  attr_accessor :idcard, :gender, :location
+  attr_accessor :idcard, :gender, :location, :valid
   def initialize(idcard)
     self.idcard = idcard.upcase
     return unless valid?
+
+    self.valid = valid?
 
     self.gender = idcard[1] == "1" ? "男" : "女"
     self.location = location_dict[idcard[0]].first
@@ -15,6 +17,13 @@ class RocIdcardInfo
     return false unless /^[A-Z]\d{9}$/.match?(idcard)
     check
   end
+
+  def to_hash
+    instance_variables.map do |var|
+      [var[1..-1].to_sym, instance_variable_get(var)]
+    end.to_h
+  end
+  alias to_h to_hash
   
   private
 
